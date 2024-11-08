@@ -1,54 +1,5 @@
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acceso al Micrófono</title>
-</head>
-
-<body>
-    <h1>Permitir Uso del Micrófono</h1>
-    <button id="activar">Activar Micrófono</button>
-    <p id="estado"></p>
-
-    <script>
-        const activarBtn = document.getElementById('activar');
-        const estadoText = document.getElementById('estado');
-
-        activarBtn.addEventListener('click', async () => {
-            try {
-                // Solicitamos acceso únicamente al micrófono
-                const stream = await navigator.mediaDevices.getUserMedia({
-                    audio: true
-                });
-
-                estadoText.textContent = "Micrófono activado correctamente.";
-
-                // Procesamiento básico del audio para confirmar que el stream funciona
-                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                const source = audioContext.createMediaStreamSource(stream);
-                const analyser = audioContext.createAnalyser();
-                source.connect(analyser);
-
-                estadoText.textContent += " Audio capturando...";
-
-                // Puedes realizar análisis de audio o visualización a partir de aquí
-                // Analizador básico que solo muestra que hay actividad en el micrófono
-            } catch (error) {
-                // En caso de error, mostramos el mensaje
-                console.error("Error al acceder al micrófono:", error);
-                estadoText.textContent = "No se pudo acceder al micrófono. Verifica los permisos.";
-            }
-        });
-    </script>
-
-
-    <iframe id="iframe_audio"
-        src="https://widget.synthflow.ai/widget/v2/1731077367088x609900330717452200/1731077366998x178601056371931360"
-        allow="micrófono" width="400px" height="600px" pointer-events="none" scrolling="no"
-        style="posición: fija; fondo: transparente; borde: ninguno; índice z: 999">
-    </iframe>
-</body>
-
-</html>
+<iframe id="iframe_audio"
+    src="https://widget.synthflow.ai/widget/v2/1731077367088x609900330717452200/1731077366998x178601056371931360"
+    allow="microphone" width="400px" height="600px"
+    style="position: fixed; background: transparent; border: none; z-index: 999;" pointer-events="none" scrolling="no">
+</iframe>
